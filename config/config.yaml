@@ -1,0 +1,53 @@
+app:
+  name: relationship-assessment-system
+  version: 1.0.0
+
+agents:
+  data_collection:
+    enabled: true
+    queue_size: 1000
+  expert:
+    relationship_psychologist:
+      enabled: true
+      frameworks:
+        - Attachment Theory
+        - Gottman Method
+        - Family Systems
+    behavioral_psychologist:
+      enabled: true
+      domains:
+        - verbal
+        - nonverbal
+        - emotional
+        - conflict
+        - intimacy
+        - support
+
+modules:
+  demographics:
+    sequence: 1
+    mandatory: true
+  family_origin:
+    sequence: 2
+  core_relationship:
+    sequence: 3
+  family_creation:
+    sequence: 4
+
+security:
+  jwt_secret_key: ${JWT_SECRET_KEY}
+  jwt_algorithm: HS256
+  access_token_expire_minutes: 30
+
+database:
+  url: ${DATABASE_URL}
+  pool_size: 5
+  max_overflow: 10
+
+redis:
+  url: ${REDIS_URL}
+  pool_size: 10
+
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
