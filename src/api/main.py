@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
+from . import endpoints
 
 app = FastAPI(
     title="Relationship Assessment System",
@@ -15,6 +16,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(endpoints.router, prefix="/api/v1")
 
 @app.get("/health")
 async def health_check():
